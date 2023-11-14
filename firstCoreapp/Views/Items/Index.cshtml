@@ -1,0 +1,69 @@
+﻿@model IEnumerable<firstCoreapp.Models.item>
+@{
+    ViewData["Title"] = "Index";
+    
+}
+
+
+<div class="container p-3">
+    <partial name="_notify" />
+<div class="row pt-4">
+    <div class="col-6">
+        <h2 class="text-primary" Textcolor="red">Items View</h2>
+    </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Items" asp-action="insertorEdit" class="btn btn-primary"><i class="bi bi-plus-square"></i>    add new item</a>
+    </div>
+</div>
+<table class="table table-hover">
+    <tr class="table-primary">
+  
+        <th width="15%">
+            Name
+        </th>
+        <th width="20%">
+            Discription
+        </th>
+            <th width="15%">
+                Category Name
+            </th>
+            <th width="30%">
+                  Image
+            </th>
+
+            <th width="20%">
+               
+            </th>
+
+@foreach(var m in Model)
+{
+            <tr class="table-primary">
+                <td scope="row">
+                @m.Name
+            </td>
+            <td>
+                @m.Description
+            </td>
+                <td>
+                     @m.cat.Name
+                </td>
+                <td>
+                       <img src="~/images/@m.imagepath" style="width:50px" class="img-thumbnail"/>
+                </td>
+                <td>
+                    <a asp-controller="Items" asp-action="delete"  asp-route-id="@m.Id" class="btn btn-success">
+                        <i class="bi bi-trash-fill"></i>   delete item
+                    </a>
+                    <a asp-controller="Items" asp-action="insertorEdit" asp-route-id="@m.Id" class="btn btn-danger">
+                        <i class="bi bi-pencil-square"></i>   update item
+                    </a>
+                </td>
+</tr>
+        
+   
+}
+
+</table>
+
+
+</div>
