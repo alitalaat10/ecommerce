@@ -32,6 +32,12 @@
             <div class="form-group">
                 <input type="file" asp-for="clientFile" onchange="loadfile(event)"/>
                 <img id="myimg" height="200"/>
+                
+                @if (Model != null)
+                {
+                    <img id="img" src="~/images/@Model.imagepath" height="200" />
+                   
+                }
                
             </div>
             <br/>
@@ -48,6 +54,8 @@
     <a asp-action="Index" asp-controller="Items">Back to List</a>
 </div>
 
+
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial.cshtml" />
     <script>
@@ -58,8 +66,10 @@
                 var myimg = document.getElementById('myimg');
                 myimg.src = reader.result;
             }
-           
+          
             reader.readAsDataURL(event.target.files[0]);
+            var img = document.getElementById('img');
+            img.remove();
         }
     </script>
 } 

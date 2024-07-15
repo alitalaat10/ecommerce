@@ -5,12 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace firstCoreapp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = clsRoles.roleAdmin)]
     public class categoryController : Controller
     {
-        public categoryController(IUnitOfWork _myUnit)
+        public categoryController(//IRepository<category> repository
+                                  IUnitOfWork _myUnit)
         {
-            //_repository = repository;s
+            //_repository = repository;
             myUnit = _myUnit;
            
         }
@@ -24,7 +25,7 @@ namespace firstCoreapp.Controllers
             return View(await myUnit.categories.FindAllAsync("items"));
         }
 
-
+        
         public IActionResult delete(int id)
         {
             if (id == 0)
@@ -39,8 +40,8 @@ namespace firstCoreapp.Controllers
             }
             
             myUnit.categories.DeleteOne(i);
+         
             
-          
             TempData["success"] = "transaction was success";
             return RedirectToAction("Index");
 
@@ -57,7 +58,7 @@ namespace firstCoreapp.Controllers
                 return View(c);
             }
 
-            var i = myUnit.categories.selectone(X => X.Id == id);
+            var i = myUnit.categories.selectone( X => X.Id == id);
             if (i == null)
             {
                 return BadRequest();
@@ -84,6 +85,7 @@ namespace firstCoreapp.Controllers
                 if (t.clientFile != null)
                 {
                     MemoryStream stream= new MemoryStream();
+                    
                     t.clientFile.CopyTo(stream);
                     t.dbimage = stream.ToArray();
                 }

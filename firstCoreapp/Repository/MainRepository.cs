@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace firstCoreapp.Repository
 {
     public class MainRepository<T> : IRepository<T> where T : class
-    {
+    { 
         public MainRepository(ApplicationDbContext db) {
             _db = db;
         }
@@ -16,7 +16,7 @@ namespace firstCoreapp.Repository
         return _db.Set<T>().Find(id);
         }
 
-        public T selectone(Expression<Func<T, bool>> predicate)
+        public  T selectone(Func<T, bool> predicate)
         {
             return _db.Set<T>().SingleOrDefault(predicate);
         }
@@ -98,5 +98,7 @@ namespace firstCoreapp.Repository
             _db.Set<T>().RemoveRange(myItem);
             _db.SaveChanges();
         }
+
+ 
     }
 }

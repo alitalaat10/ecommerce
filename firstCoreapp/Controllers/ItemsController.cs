@@ -1,4 +1,5 @@
 ﻿using firstCoreapp.Data;
+using firstCoreapp.Migrations;
 using firstCoreapp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -38,7 +39,9 @@ namespace firstCoreapp.Controllers
             }
           
             var i = _db.items.Where(x => x.Id == id).FirstOrDefault();
-            if(i == null)
+            //var i = _db.items.FirstOrDefault(x => x.Id == id);
+
+            if (i == null)
             {
                 return BadRequest();
             }

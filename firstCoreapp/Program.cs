@@ -12,10 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("MyConnection")));
-
+//.addRole.....
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+//or
+//builder.Services.AddIdentity<identityUser, identityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddTransient<IEmailSender, clsEmailConfirm>();
 // builder.Services.AddTransient(typeof(IRepository<>),typeof(MainRepository<>));
@@ -35,7 +37,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 

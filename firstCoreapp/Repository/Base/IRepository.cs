@@ -5,7 +5,7 @@ namespace firstCoreapp.Repository.Base;
 public interface IRepository<T> where T : class
 {
     public T Find(int id);
-    public T selectone(Expression<Func<T, bool>> predicate);
+    public T selectone (Func<T,bool> predicate);
     public IEnumerable<T> FindAll();
 
     public IEnumerable<T> FindAll(params string[] eagers);
@@ -24,4 +24,5 @@ public interface IRepository<T> where T : class
     public void AddMany(IEnumerable<T> myItem);
     public void UpdateMany(IEnumerable<T> myItem);
     public void DeleteMany(IEnumerable<T> myItem);
+
 }

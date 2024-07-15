@@ -8,8 +8,8 @@ namespace TestCoreApp.Models
     {
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var fEmail = "alitalaat142@gmail.com";
-            var fPassword = "159236478";
+            var fEmail = "alitalaat142@outlook.com";
+            var fPassword = "1952001_Ali";
 
             var theMsg = new MailMessage();
             theMsg.From = new MailAddress(fEmail);
@@ -18,7 +18,7 @@ namespace TestCoreApp.Models
             theMsg.Body = $"<html><body>{htmlMessage}</body></html>";
             theMsg.IsBodyHtml = true;
 
-            var smtpClint = new SmtpClient("smtp_mail.outlook.com")
+            var smtpClint = new SmtpClient("smtp.office365.com")
             {
                 EnableSsl = true,
                 Credentials = new NetworkCredential(fEmail, fPassword),

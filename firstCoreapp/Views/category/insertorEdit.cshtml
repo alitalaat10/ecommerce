@@ -22,7 +22,7 @@
             <div class="form-group">
                 <input type="file" asp-for="clientFile" onchange="loadfile(event)" />
                 <img id="myimg" height="200"/>
-                @if(Model.Id!=0)
+                @if(Model!=null)
                 {
                     <img id="img" src="@Model.imgSrc" height="200" />
                 }
@@ -57,7 +57,6 @@
             }
 
             reader.readAsDataURL(event.target.files[0]);
-
             var img = document.getElementById('img');
             img.remove();
         }

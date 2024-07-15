@@ -22,6 +22,7 @@ namespace firstCoreapp.Areas.Employees.Controllers
         }
 
         // GET: Employees/Employees
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
               return _context.employees != null ? 
@@ -119,7 +120,7 @@ namespace firstCoreapp.Areas.Employees.Controllers
             }
             return View(employee);
         }
-
+       
         // GET: Employees/Employees/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using firstCoreapp.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -119,7 +120,7 @@ namespace firstCoreapp.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
                 user.PhoneNumber = Input.phoneNumber;
-               user.EmailConfirmed = true;
+                //user.EmailConfirmed = true;
 
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -130,7 +131,10 @@ namespace firstCoreapp.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _userManager.AddToRoleAsync(user, "User");
+
+
+                    ///add defualt role
+                    await _userManager.AddToRoleAsync(user, clsRoles.roleUser);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
